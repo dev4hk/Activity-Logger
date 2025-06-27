@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: activity-logger
+  cloud:
+    stream:
+      bindings:
+        userActivity-out-0:
+          destination: user-activity-events
+          contentType: application/json
+        userActivity-in-0:
+          destination: user-activity-events
+          group: activity-logger-group
+          contentType: application/json
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ${MQ_USERNAME}
+    password: ${MQ_PASSWORD}
+    connection-timeout: 10s
+server:
+  port: 8080
