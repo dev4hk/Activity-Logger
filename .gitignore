@@ -59,3 +59,5 @@ docker-compose/**/.data
 
 # Exclude temporarily generated files
 *~
+
+postman.json
