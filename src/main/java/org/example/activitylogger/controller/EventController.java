@@ -4,18 +4,13 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.activitylogger.consumer.EventConsumer;
 import org.example.activitylogger.dto.UserActivityRequestDto;
 import org.example.activitylogger.model.UserActivityEvent;
 import org.example.activitylogger.producer.EventProducer;
-import org.example.activitylogger.consumer.EventConsumer;
-import org.example.activitylogger.enums.ActivityType;
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -47,7 +42,7 @@ public class EventController {
 
     @GetMapping("/by-user")
     public List<UserActivityEvent> getEventsByUserId(@NotNull(message = "User ID cannot be null") @RequestParam String userId) {
-       log.info("Fetching events for user: {}", userId);
+        log.info("Fetching events for user: {}", userId);
         return eventConsumer.getEventsByUserId(userId);
     }
 }
