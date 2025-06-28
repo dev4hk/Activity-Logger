@@ -1,5 +1,7 @@
 package org.example.activitylogger.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.activitylogger.dto.UserActivityRequestDto;
@@ -25,7 +27,7 @@ public class EventController {
     private final EventConsumer eventConsumer;
 
     @PostMapping("/publish")
-    public String publishEvent(@RequestBody UserActivityRequestDto requestDto) {
+    public String publishEvent(@Valid @RequestBody UserActivityRequestDto requestDto) {
         UserActivityEvent event = new UserActivityEvent(
                 requestDto.getUserId(),
                 requestDto.getActivityType(),
@@ -44,7 +46,7 @@ public class EventController {
     }
 
     @GetMapping("/by-user")
-    public List<UserActivityEvent> getEventsByUserId(@RequestParam String userId) {
+    public List<UserActivityEvent> getEventsByUserId(@NotNull(message = "User ID cannot be null") @RequestParam String userId) {
        log.info("Fetching events for user: {}", userId);
         return eventConsumer.getEventsByUserId(userId);
     }
