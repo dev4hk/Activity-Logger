@@ -7,6 +7,12 @@
 
 ---
 
+***🎬 Demo***
+
+![Demo](screenshot/demo.gif)
+
+---
+
 ***✨ Features***
 
 - **Real-time Activity Feed** – Live updates via WebSockets
